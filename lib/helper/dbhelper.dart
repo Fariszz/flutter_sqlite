@@ -27,7 +27,7 @@ class DbHelper {
       name TEXT,
       price INTEGER,
       stok INTEGER,
-      kode TEXT,
+      kode TEXT
       )
   ''');
   }
