@@ -34,7 +34,7 @@ class _HomeState extends State<Home> {
           alignment: Alignment.bottomCenter,
           child: SizedBox(
             width: double.infinity,
-            child: RaisedButton(
+            child: ElevatedButton(
               child: Text("Tambah Item"),
               onPressed: () async {
                 var item = await navigateToEntryForm(context, null);
@@ -93,7 +93,6 @@ class _HomeState extends State<Home> {
               var item =
                   await navigateToEntryForm(context, this.itemList![index]);
               //TODO 4 Panggil Fungsi untuk Edit data
-
               if (item != null) {
                 //TODO 5 Panggil Fungsi untuk Update data
                 int result = await dbHelper.update(item);
