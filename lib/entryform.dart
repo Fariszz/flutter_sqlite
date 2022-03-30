@@ -16,6 +16,8 @@ class _EntryFormState extends State<EntryForm> {
 
   TextEditingController nameController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController stokController = TextEditingController();
+  TextEditingController kodeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +25,8 @@ class _EntryFormState extends State<EntryForm> {
     if (item != null) {
       nameController.text = item!.name;
       priceController.text = item!.price.toString();
+      kodeController.text = item!.kode;
+      stokController.text = item!.stok.toSring();
     }
     return Scaffold(
         appBar: AppBar(
@@ -68,6 +72,35 @@ class _EntryFormState extends State<EntryForm> {
 
               Padding(
                 padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: TextField(
+                  controller: stokController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    labelText: 'Stok',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                child: TextField(
+                  controller: kodeController,
+                  decoration: InputDecoration(
+                    labelText: 'Kode',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (value) {},
+                ),
+              ),
+
+              Padding(
+                padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -83,11 +116,17 @@ class _EntryFormState extends State<EntryForm> {
                         onPressed: () {
                           if (item == null) {
                             // Tambah Data
-                            item = Item(nameController.text,
-                                int.parse(priceController.text));
+                            item = Item(
+                              nameController.text,
+                              int.parse(priceController.text),
+                              int.parse(stokController.text),
+                              kodeController.text,
+                            );
                           } else {
                             item!.name = nameController.text;
                             item!.price = int.parse(priceController.text);
+                            item!.stok = int.parse(stokController.text);
+                            item!.kode = kodeController.text;
                           }
                           Navigator.pop(context, item);
                         },

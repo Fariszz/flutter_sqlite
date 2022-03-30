@@ -15,7 +15,7 @@ class DbHelper {
     String path = directory.path + 'items.db';
 
     //create, read databases
-    var itemDatabase = openDatabase(path, version: 4, onCreate: _createDb);
+    var itemDatabase = openDatabase(path, version: 1, onCreate: _createDb);
 
     return itemDatabase;
   }
@@ -25,7 +25,9 @@ class DbHelper {
       CREATE TABLE item (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
-      price INTEGER
+      price INTEGER,
+      stok INTEGER,
+      kode TEXT,
       )
   ''');
   }
@@ -47,8 +49,8 @@ class DbHelper {
   // update databases
   Future<int> update(Item object) async {
     Database db = await this.initDb();
-    int count = await db.update('item', object.toMap(),
-        where: 'id=?', whereArgs: [object.id]);
+    int count = await db
+        .update('item', object.toMap(), where: 'id=?', whereArgs: [object.id]);
     return count;
   }
 
@@ -83,6 +85,4 @@ class DbHelper {
     }
     return _database!;
   }
-
-
 }

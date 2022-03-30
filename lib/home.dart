@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
           color: Colors.white,
           elevation: 2.0,
           child: ListTile(
-            leading: CircleAvatar(
+            leading: const CircleAvatar(
               backgroundColor: Colors.red,
               child: Icon(Icons.ad_units),
             ),
@@ -78,7 +78,20 @@ class _HomeState extends State<Home> {
               this.itemList![index].name,
               style: textStyle,
             ),
-            subtitle: Text(this.itemList![index].price.toString()),
+            // subtitle: Text(this.itemList![index].price.toString()),
+            subtitle: Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(this.itemList![index].price.toString()),
+                ),
+                Expanded(
+                  child: Text(this.itemList![index].kode.toString()),
+                ),
+                Expanded(
+                  child: Text(this.itemList![index].stok.toString()),
+                ),
+              ],
+            ),
             trailing: GestureDetector(
               child: Icon(Icons.delete),
               onTap: () async {
